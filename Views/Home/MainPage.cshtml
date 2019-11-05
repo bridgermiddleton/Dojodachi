@@ -1,0 +1,48 @@
+@model PetDojodachi
+<div class="container text-center">
+    <p>Fullness: @Model.Fullness   Happiness: @Model.Happiness   Meals: @Model.Meals  Energy: @Model.Energy</p>
+    @{
+        if (@Model.Happiness > 100 && @Model.Fullness > 100 && @Model.Energy > 100)
+        {
+            <div class="jumbotron text-center">
+                <h2 class="display-4">Congratulations! You won!</h2>
+                <form asp-action="Restart" asp-controller="Home" method="POST">
+                    <button type="submit" class="btn btn-danger">Restart?</button>
+                </form>
+            </div>
+            
+        }
+        else if (@Model.Happiness <= 0 || @Model.Fullness <= 0 )
+        {
+            <div class="jumbotron text-center">
+                <h2 class="display-4">Your Dojodachi has passed away...RIP</h2>
+                <form asp-action="Restart" asp-controller="Home" method="POST">
+                    <button type="submit" class="btn btn-danger">Restart?</button>
+                </form>
+                
+            </div>
+        }
+        else
+        {
+           <div class="jumbotron">
+                <p>@Model.Text</p>
+                <div class="btn-group" role="group">
+                    <form asp-action="Feed" asp-controller="Home" method="POST">
+                        <button style="margin-right: 20px;" type="submit" class="btn btn-success">Feed</button>
+
+                    </form>
+                    <form asp-action="Play" asp-controller="Home" method="POST">
+                        <button style="margin-right: 20px;" type="submit" class="btn btn-primary">Play</button>
+                    </form>
+                    <form asp-action="Work" asp-controller="Home" method="POST">
+                        <button style="margin-right: 20px;" type="submit" class="btn btn-secondary">Work</button>
+                    </form>
+                    <form asp-action="Sleep" asp-controller="Home" method="POST">
+                        <button style="margin-right: 20px;" type="submit" class="btn btn-info">Sleep</button>
+                    </form>
+                </div>
+            </div> 
+        }
+    }
+    
+</div>
